@@ -8,8 +8,8 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.event.EventHandler;
 
 public class VBE extends Plugin implements Listener {
-	
-	final static String CHANNEL = "vivecraft:data";	
+
+	public static final String CHANNEL = "vivecraft:data";
 
 	@Override
 	public void onEnable() {
@@ -20,18 +20,19 @@ public class VBE extends Plugin implements Listener {
 	public void onDisable() {
 		this.getProxy().unregisterChannel(CHANNEL);
 	}
-	
+
 	@EventHandler
-    public void on(PluginMessageEvent event){
-		if (!event.getTag().equalsIgnoreCase(CHANNEL)) return;
-		if(event.getReceiver() instanceof ProxiedPlayer) {
-			ProxiedPlayer player = (ProxiedPlayer) event.getReceiver();
+	public void on(PluginMessageEvent event) {
+		if (!event.getTag().equalsIgnoreCase(CHANNEL))
+			return;
+		if (event.getReceiver() instanceof ProxiedPlayer) {
+			ProxiedPlayer player = (ProxiedPlayer)event.getReceiver();
 			player.sendData(CHANNEL, event.getData());
-		} else if(event.getReceiver() instanceof Server) {
-			Server server = (Server) event.getReceiver();
+		} else if (event.getReceiver() instanceof Server) {
+			Server server = (Server)event.getReceiver();
 			server.sendData(CHANNEL, event.getData());
-		}        
-    }
+		}
+	}
 
 
 }
